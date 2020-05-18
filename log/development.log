@@ -1,0 +1,334 @@
+  [1m[35m (2.3ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL PRIMARY KEY)[0m
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" varchar NOT NULL PRIMARY KEY, "value" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateRest (20200518091111)
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE TABLE "users" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "number" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "tables" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "restaurant_id" integer, "number" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "restaurants" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "address" varchar, "working_hours" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE TABLE "bookings" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "user_id" integer, "table_id" integer, "start_book" datetime, "end_book" datetime, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE  INDEX "index_bookings_on_user_id" ON "bookings" ("user_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE  INDEX "index_bookings_on_table_id" ON "bookings" ("table_id")[0m
+  [1m[36mprimary::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20200518091111"]]
+  [1m[35m (0.9ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.3ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["key", "environment"], ["value", "development"], ["created_at", "2020-05-18 09:27:44.063996"], ["updated_at", "2020-05-18 09:27:44.063996"]]
+  [1m[35m (0.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mRestaurant Create (0.3ms)[0m  [1m[32mINSERT INTO "restaurants" ("name", "address", "working_hours", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["name", "Star"], ["address", "Shevchenka st 1"], ["working_hours", "10:00-23:00"], ["created_at", "2020-05-18 09:27:46.989888"], ["updated_at", "2020-05-18 09:27:46.989888"]]
+  [1m[35m (0.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mRestaurant Load (0.2ms)[0m  [1m[34mSELECT "restaurants".* FROM "restaurants" ORDER BY "restaurants"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTable Create (0.3ms)[0m  [1m[32mINSERT INTO "tables" ("restaurant_id", "number", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["restaurant_id", 1], ["number", "1a"], ["created_at", "2020-05-18 09:27:47.018744"], ["updated_at", "2020-05-18 09:27:47.018744"]]
+  [1m[35m (0.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("name", "number", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Bohdan"], ["number", "12133213232"], ["created_at", "2020-05-18 09:27:47.032440"], ["updated_at", "2020-05-18 09:27:47.032440"]]
+  [1m[35m (0.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mTable Load (0.1ms)[0m  [1m[34mSELECT "tables".* FROM "tables" ORDER BY "tables"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateRest (20200518091111)
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (1.0ms)[0m  [1m[35mDROP TABLE "bookings"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE "restaurants"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "tables"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE "users"[0m
+  [1m[36mprimary::SchemaMigration Destroy (0.1ms)[0m  [1m[31mDELETE FROM "schema_migrations" WHERE "schema_migrations"."version" = ?[0m  [["version", "20200518091111"]]
+  [1m[35m (0.6ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateRest (20200518091111)
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE TABLE "users" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "number" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "tables" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "restaurant_id" integer, "number" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "restaurants" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "address" varchar, "working_hours" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "bookings" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "user_id" integer, "table_id" integer, "start_book" datetime, "end_book" datetime, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE  INDEX "index_bookings_on_user_id" ON "bookings" ("user_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE  INDEX "index_bookings_on_table_id" ON "bookings" ("table_id")[0m
+  [1m[36mprimary::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20200518091111"]]
+  [1m[35m (1.3ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mRestaurant Create (0.3ms)[0m  [1m[32mINSERT INTO "restaurants" ("name", "address", "working_hours", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["name", "Star"], ["address", "Shevchenka st 1"], ["working_hours", "10:00-23:00"], ["created_at", "2020-05-18 09:30:36.311662"], ["updated_at", "2020-05-18 09:30:36.311662"]]
+  [1m[35m (0.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mRestaurant Load (0.2ms)[0m  [1m[34mSELECT "restaurants".* FROM "restaurants" ORDER BY "restaurants"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTable Create (0.3ms)[0m  [1m[32mINSERT INTO "tables" ("restaurant_id", "number", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["restaurant_id", 1], ["number", "1a"], ["created_at", "2020-05-18 09:30:36.331906"], ["updated_at", "2020-05-18 09:30:36.331906"]]
+  [1m[35m (0.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("name", "number", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Bohdan"], ["number", "12133213232"], ["created_at", "2020-05-18 09:30:36.343286"], ["updated_at", "2020-05-18 09:30:36.343286"]]
+  [1m[35m (0.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mTable Load (0.1ms)[0m  [1m[34mSELECT "tables".* FROM "tables" ORDER BY "tables"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.0ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mRestaurant Create (0.3ms)[0m  [1m[32mINSERT INTO "restaurants" ("name", "address", "working_hours", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["name", "Star"], ["address", "Shevchenka st 1"], ["working_hours", "10:00-23:00"], ["created_at", "2020-05-18 09:30:56.190428"], ["updated_at", "2020-05-18 09:30:56.190428"]]
+  [1m[35m (0.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mRestaurant Load (0.1ms)[0m  [1m[34mSELECT "restaurants".* FROM "restaurants" ORDER BY "restaurants"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTable Create (0.3ms)[0m  [1m[32mINSERT INTO "tables" ("restaurant_id", "number", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["restaurant_id", 1], ["number", "1a"], ["created_at", "2020-05-18 09:30:56.203231"], ["updated_at", "2020-05-18 09:30:56.203231"]]
+  [1m[35m (0.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("name", "number", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Bohdan"], ["number", "12133213232"], ["created_at", "2020-05-18 09:30:56.217582"], ["updated_at", "2020-05-18 09:30:56.217582"]]
+  [1m[35m (0.6ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mTable Load (0.1ms)[0m  [1m[34mSELECT "tables".* FROM "tables" ORDER BY "tables"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/models/booking.rb:13:in `is_valid_time'
+  [1m[36mRestaurant Load (0.2ms)[0m  [1m[34mSELECT "restaurants".* FROM "restaurants" WHERE "restaurants"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/models/booking.rb:13:in `is_valid_time'
+  [1m[36mBooking Load (0.1ms)[0m  [1m[34mSELECT "bookings".* FROM "bookings" WHERE "bookings"."table_id" = ?[0m  [["table_id", 1]]
+  ↳ app/models/table.rb:6:in `is_not_allowed_book'
+  [1m[35m (0.1ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateRest (20200518091111)
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.4ms)[0m  [1m[35mDROP TABLE "bookings"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE "restaurants"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE "tables"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "users"[0m
+  [1m[36mprimary::SchemaMigration Destroy (0.1ms)[0m  [1m[31mDELETE FROM "schema_migrations" WHERE "schema_migrations"."version" = ?[0m  [["version", "20200518091111"]]
+  [1m[35m (0.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateRest (20200518091111)
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE TABLE "users" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "number" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "tables" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "restaurant_id" integer, "number" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "restaurants" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "address" varchar, "working_hours" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "bookings" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "user_id" integer, "table_id" integer, "start_book" datetime, "end_book" datetime, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE  INDEX "index_bookings_on_user_id" ON "bookings" ("user_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE  INDEX "index_bookings_on_table_id" ON "bookings" ("table_id")[0m
+  [1m[36mprimary::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20200518091111"]]
+  [1m[35m (0.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.0ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.0ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mRestaurant Create (0.3ms)[0m  [1m[32mINSERT INTO "restaurants" ("name", "address", "working_hours", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["name", "Star"], ["address", "Shevchenka st 1"], ["working_hours", "10:00-23:00"], ["created_at", "2020-05-18 09:31:36.232276"], ["updated_at", "2020-05-18 09:31:36.232276"]]
+  [1m[35m (0.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mRestaurant Load (0.1ms)[0m  [1m[34mSELECT "restaurants".* FROM "restaurants" ORDER BY "restaurants"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTable Create (0.3ms)[0m  [1m[32mINSERT INTO "tables" ("restaurant_id", "number", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["restaurant_id", 1], ["number", "1a"], ["created_at", "2020-05-18 09:31:36.244168"], ["updated_at", "2020-05-18 09:31:36.244168"]]
+  [1m[35m (0.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Create (0.2ms)[0m  [1m[32mINSERT INTO "users" ("name", "number", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Bohdan"], ["number", "12133213232"], ["created_at", "2020-05-18 09:31:36.257287"], ["updated_at", "2020-05-18 09:31:36.257287"]]
+  [1m[35m (0.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mTable Load (0.1ms)[0m  [1m[34mSELECT "tables".* FROM "tables" ORDER BY "tables"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/models/booking.rb:13:in `is_valid_time'
+  [1m[36mRestaurant Load (1.1ms)[0m  [1m[34mSELECT "restaurants".* FROM "restaurants" WHERE "restaurants"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/models/booking.rb:13:in `is_valid_time'
+  [1m[36mBooking Load (0.1ms)[0m  [1m[34mSELECT "bookings".* FROM "bookings" WHERE "bookings"."table_id" = ?[0m  [["table_id", 1]]
+  ↳ app/models/table.rb:6:in `is_not_allowed_book'
+  [1m[35m (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mBooking Load (0.1ms)[0m  [1m[34mSELECT "bookings".* FROM "bookings" ORDER BY "bookings"."id" DESC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mBooking Load (0.1ms)[0m  [1m[34mSELECT "bookings".* FROM "bookings" ORDER BY "bookings"."id" DESC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" DESC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mTable Load (0.1ms)[0m  [1m[34mSELECT "tables".* FROM "tables" ORDER BY "tables"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mRestaurant Load (0.1ms)[0m  [1m[34mSELECT "restaurants".* FROM "restaurants" WHERE "restaurants"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mBooking Load (0.1ms)[0m  [1m[34mSELECT "bookings".* FROM "bookings" WHERE "bookings"."table_id" = ?[0m  [["table_id", 1]]
+  [1m[35m (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mBooking Load (0.1ms)[0m  [1m[34mSELECT "bookings".* FROM "bookings" ORDER BY "bookings"."id" DESC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mTable Load (0.1ms)[0m  [1m[34mSELECT "tables".* FROM "tables" ORDER BY "tables"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mRestaurant Load (0.1ms)[0m  [1m[34mSELECT "restaurants".* FROM "restaurants" WHERE "restaurants"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mBooking Load (0.0ms)[0m  [1m[34mSELECT "bookings".* FROM "bookings" WHERE "bookings"."table_id" = ?[0m  [["table_id", 1]]
+  [1m[35m (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mTable Load (0.1ms)[0m  [1m[34mSELECT "tables".* FROM "tables" ORDER BY "tables"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mRestaurant Load (0.1ms)[0m  [1m[34mSELECT "restaurants".* FROM "restaurants" WHERE "restaurants"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mBooking Load (0.1ms)[0m  [1m[34mSELECT "bookings".* FROM "bookings" WHERE "bookings"."table_id" = ?[0m  [["table_id", 1]]
+  [1m[36mBooking Create (0.4ms)[0m  [1m[32mINSERT INTO "bookings" ("user_id", "table_id", "start_book", "end_book", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["user_id", 1], ["table_id", 1], ["start_book", "2020-05-18 10:00:00"], ["end_book", "2020-05-18 10:30:00"], ["created_at", "2020-05-18 09:36:30.789493"], ["updated_at", "2020-05-18 09:36:30.789493"]]
+  [1m[35m (0.6ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mTable Load (0.1ms)[0m  [1m[34mSELECT "tables".* FROM "tables" ORDER BY "tables"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mRestaurant Load (0.1ms)[0m  [1m[34mSELECT "restaurants".* FROM "restaurants" WHERE "restaurants"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mBooking Load (0.1ms)[0m  [1m[34mSELECT "bookings".* FROM "bookings" WHERE "bookings"."table_id" = ?[0m  [["table_id", 1]]
+  [1m[36mBooking Create (0.3ms)[0m  [1m[32mINSERT INTO "bookings" ("user_id", "table_id", "start_book", "end_book", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["user_id", 1], ["table_id", 1], ["start_book", "2020-05-18 10:30:00"], ["end_book", "2020-05-18 11:00:00"], ["created_at", "2020-05-18 09:37:28.809012"], ["updated_at", "2020-05-18 09:37:28.809012"]]
+  [1m[35m (0.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mTable Load (0.1ms)[0m  [1m[34mSELECT "tables".* FROM "tables" ORDER BY "tables"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mRestaurant Load (0.1ms)[0m  [1m[34mSELECT "restaurants".* FROM "restaurants" WHERE "restaurants"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mBooking Load (0.1ms)[0m  [1m[34mSELECT "bookings".* FROM "bookings" WHERE "bookings"."table_id" = ?[0m  [["table_id", 1]]
+  [1m[36mBooking Create (0.3ms)[0m  [1m[32mINSERT INTO "bookings" ("user_id", "table_id", "start_book", "end_book", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["user_id", 1], ["table_id", 1], ["start_book", "2020-05-18 11:00:00"], ["end_book", "2020-05-18 12:00:00"], ["created_at", "2020-05-18 09:37:58.652690"], ["updated_at", "2020-05-18 09:37:58.652690"]]
+  [1m[35m (0.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mTable Load (0.1ms)[0m  [1m[34mSELECT "tables".* FROM "tables" ORDER BY "tables"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mRestaurant Load (0.1ms)[0m  [1m[34mSELECT "restaurants".* FROM "restaurants" WHERE "restaurants"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mBooking Load (0.0ms)[0m  [1m[34mSELECT "bookings".* FROM "bookings" WHERE "bookings"."table_id" = ?[0m  [["table_id", 1]]
+  [1m[36mBooking Create (0.3ms)[0m  [1m[32mINSERT INTO "bookings" ("user_id", "table_id", "start_book", "end_book", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["user_id", 1], ["table_id", 1], ["start_book", "2020-05-18 12:00:00"], ["end_book", "2020-05-18 13:30:00"], ["created_at", "2020-05-18 09:38:24.752642"], ["updated_at", "2020-05-18 09:38:24.752642"]]
+  [1m[35m (0.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mTable Load (0.1ms)[0m  [1m[34mSELECT "tables".* FROM "tables" ORDER BY "tables"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mRestaurant Load (0.1ms)[0m  [1m[34mSELECT "restaurants".* FROM "restaurants" WHERE "restaurants"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mBooking Load (0.1ms)[0m  [1m[34mSELECT "bookings".* FROM "bookings" WHERE "bookings"."table_id" = ?[0m  [["table_id", 1]]
+  [1m[35m (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mTable Load (0.1ms)[0m  [1m[34mSELECT "tables".* FROM "tables" ORDER BY "tables"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mRestaurant Load (0.1ms)[0m  [1m[34mSELECT "restaurants".* FROM "restaurants" WHERE "restaurants"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mBooking Load (0.1ms)[0m  [1m[34mSELECT "bookings".* FROM "bookings" WHERE "bookings"."table_id" = ?[0m  [["table_id", 1]]
+  [1m[35m (0.1ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mTable Load (0.1ms)[0m  [1m[34mSELECT "tables".* FROM "tables" ORDER BY "tables"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mRestaurant Load (0.1ms)[0m  [1m[34mSELECT "restaurants".* FROM "restaurants" WHERE "restaurants"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mBooking Load (0.1ms)[0m  [1m[34mSELECT "bookings".* FROM "bookings" WHERE "bookings"."table_id" = ?[0m  [["table_id", 1]]
+  [1m[35m (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mTable Load (0.1ms)[0m  [1m[34mSELECT "tables".* FROM "tables" ORDER BY "tables"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mRestaurant Load (0.1ms)[0m  [1m[34mSELECT "restaurants".* FROM "restaurants" WHERE "restaurants"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mBooking Load (0.1ms)[0m  [1m[34mSELECT "bookings".* FROM "bookings" WHERE "bookings"."table_id" = ?[0m  [["table_id", 1]]
+  [1m[35m (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mTable Load (0.2ms)[0m  [1m[34mSELECT "tables".* FROM "tables" ORDER BY "tables"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mRestaurant Load (0.1ms)[0m  [1m[34mSELECT "restaurants".* FROM "restaurants" WHERE "restaurants"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mBooking Load (0.1ms)[0m  [1m[34mSELECT "bookings".* FROM "bookings" WHERE "bookings"."table_id" = ?[0m  [["table_id", 1]]
+  [1m[36mBooking Create (0.3ms)[0m  [1m[32mINSERT INTO "bookings" ("user_id", "table_id", "start_book", "end_book", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["user_id", 1], ["table_id", 1], ["start_book", "2020-05-18 22:30:00"], ["end_book", "2020-05-18 23:30:00"], ["created_at", "2020-05-18 09:41:50.483280"], ["updated_at", "2020-05-18 09:41:50.483280"]]
+  [1m[35m (0.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mBooking Load (0.1ms)[0m  [1m[34mSELECT "bookings".* FROM "bookings" ORDER BY "bookings"."id" DESC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mBooking Destroy (0.3ms)[0m  [1m[31mDELETE FROM "bookings" WHERE "bookings"."id" = ?[0m  [["id", 5]]
+  [1m[35m (0.6ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mBooking Load (0.1ms)[0m  [1m[34mSELECT "bookings".* FROM "bookings" ORDER BY "bookings"."id" DESC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mBooking Destroy (0.4ms)[0m  [1m[31mDELETE FROM "bookings" WHERE "bookings"."id" = ?[0m  [["id", 4]]
+  [1m[35m (0.9ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mBooking Update (0.2ms)[0m  [1m[33mUPDATE "bookings" SET "id" = ?, "updated_at" = ? WHERE "bookings"."id" = ?[0m  [["id", nil], ["updated_at", "2020-05-18 09:44:12.234593"], ["id", 5]]
+  [1m[35m (0.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mBooking Load (0.2ms)[0m  [1m[34mSELECT "bookings".* FROM "bookings" ORDER BY "bookings"."id" DESC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mBooking Load (0.2ms)[0m  [1m[34mSELECT "bookings".* FROM "bookings"[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mBooking Destroy (0.4ms)[0m  [1m[31mDELETE FROM "bookings" WHERE "bookings"."id" = ?[0m  [["id", 1]]
+  [1m[35m (0.9ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mBooking Destroy (0.3ms)[0m  [1m[31mDELETE FROM "bookings" WHERE "bookings"."id" = ?[0m  [["id", 2]]
+  [1m[35m (0.6ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mBooking Destroy (0.3ms)[0m  [1m[31mDELETE FROM "bookings" WHERE "bookings"."id" = ?[0m  [["id", 3]]
+  [1m[35m (0.6ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mTable Load (0.1ms)[0m  [1m[34mSELECT "tables".* FROM "tables" ORDER BY "tables"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mRestaurant Load (0.1ms)[0m  [1m[34mSELECT "restaurants".* FROM "restaurants" WHERE "restaurants"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mBooking Load (0.1ms)[0m  [1m[34mSELECT "bookings".* FROM "bookings" WHERE "bookings"."table_id" = ?[0m  [["table_id", 1]]
+  [1m[36mBooking Create (0.3ms)[0m  [1m[32mINSERT INTO "bookings" ("user_id", "table_id", "start_book", "end_book", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["user_id", 1], ["table_id", 1], ["start_book", "2020-05-18 10:00:00"], ["end_book", "2020-05-18 10:30:00"], ["created_at", "2020-05-18 09:45:04.629818"], ["updated_at", "2020-05-18 09:45:04.629818"]]
+  [1m[35m (0.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mBooking Load (0.2ms)[0m  [1m[34mSELECT "bookings".* FROM "bookings" ORDER BY "bookings"."id" DESC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mTable Load (0.1ms)[0m  [1m[34mSELECT "tables".* FROM "tables" ORDER BY "tables"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mRestaurant Load (0.1ms)[0m  [1m[34mSELECT "restaurants".* FROM "restaurants" WHERE "restaurants"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mBooking Load (0.0ms)[0m  [1m[34mSELECT "bookings".* FROM "bookings" WHERE "bookings"."table_id" = ?[0m  [["table_id", 1]]
+  [1m[35m (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mTable Load (0.1ms)[0m  [1m[34mSELECT "tables".* FROM "tables" ORDER BY "tables"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mRestaurant Load (0.1ms)[0m  [1m[34mSELECT "restaurants".* FROM "restaurants" WHERE "restaurants"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mBooking Load (0.0ms)[0m  [1m[34mSELECT "bookings".* FROM "bookings" WHERE "bookings"."table_id" = ?[0m  [["table_id", 1]]
+  [1m[35m (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mTable Load (0.1ms)[0m  [1m[34mSELECT "tables".* FROM "tables" ORDER BY "tables"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mRestaurant Load (0.1ms)[0m  [1m[34mSELECT "restaurants".* FROM "restaurants" WHERE "restaurants"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mBooking Load (0.0ms)[0m  [1m[34mSELECT "bookings".* FROM "bookings" WHERE "bookings"."table_id" = ?[0m  [["table_id", 1]]
+  [1m[35m (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mTable Load (0.1ms)[0m  [1m[34mSELECT "tables".* FROM "tables" ORDER BY "tables"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mRestaurant Load (0.1ms)[0m  [1m[34mSELECT "restaurants".* FROM "restaurants" WHERE "restaurants"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mBooking Load (0.1ms)[0m  [1m[34mSELECT "bookings".* FROM "bookings" WHERE "bookings"."table_id" = ?[0m  [["table_id", 1]]
+  [1m[36mBooking Create (0.3ms)[0m  [1m[32mINSERT INTO "bookings" ("user_id", "table_id", "start_book", "end_book", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["user_id", 1], ["table_id", 1], ["start_book", "2020-05-18 23:00:00"], ["end_book", "2020-05-18 23:30:00"], ["created_at", "2020-05-18 09:46:56.550434"], ["updated_at", "2020-05-18 09:46:56.550434"]]
+  [1m[35m (0.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mTable Load (0.1ms)[0m  [1m[34mSELECT "tables".* FROM "tables" ORDER BY "tables"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mRestaurant Load (0.1ms)[0m  [1m[34mSELECT "restaurants".* FROM "restaurants" WHERE "restaurants"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mBooking Load (0.1ms)[0m  [1m[34mSELECT "bookings".* FROM "bookings" WHERE "bookings"."table_id" = ?[0m  [["table_id", 1]]
+  [1m[35m (0.1ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mBooking Load (0.2ms)[0m  [1m[34mSELECT "bookings".* FROM "bookings" ORDER BY "bookings"."id" DESC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mBooking Load (0.1ms)[0m  [1m[34mSELECT "bookings".* FROM "bookings" ORDER BY "bookings"."id" DESC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mBooking Destroy (1.2ms)[0m  [1m[31mDELETE FROM "bookings" WHERE "bookings"."id" = ?[0m  [["id", 7]]
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mTable Load (0.1ms)[0m  [1m[34mSELECT "tables".* FROM "tables" ORDER BY "tables"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mRestaurant Load (0.1ms)[0m  [1m[34mSELECT "restaurants".* FROM "restaurants" WHERE "restaurants"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mBooking Load (0.0ms)[0m  [1m[34mSELECT "bookings".* FROM "bookings" WHERE "bookings"."table_id" = ?[0m  [["table_id", 1]]
+  [1m[36mBooking Create (0.3ms)[0m  [1m[32mINSERT INTO "bookings" ("user_id", "table_id", "start_book", "end_book", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["user_id", 1], ["table_id", 1], ["start_book", "2020-05-18 23:00:00"], ["end_book", "2020-05-18 23:30:00"], ["created_at", "2020-05-18 09:51:33.951430"], ["updated_at", "2020-05-18 09:51:33.951430"]]
+  [1m[35m (0.6ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mBooking Load (0.1ms)[0m  [1m[34mSELECT "bookings".* FROM "bookings" ORDER BY "bookings"."id" DESC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mBooking Destroy (1.0ms)[0m  [1m[31mDELETE FROM "bookings" WHERE "bookings"."id" = ?[0m  [["id", 8]]
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mTable Load (0.1ms)[0m  [1m[34mSELECT "tables".* FROM "tables" ORDER BY "tables"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mTable Load (0.1ms)[0m  [1m[34mSELECT "tables".* FROM "tables" ORDER BY "tables"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mRestaurant Load (0.1ms)[0m  [1m[34mSELECT "restaurants".* FROM "restaurants" WHERE "restaurants"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mBooking Load (0.1ms)[0m  [1m[34mSELECT "bookings".* FROM "bookings" WHERE "bookings"."table_id" = ?[0m  [["table_id", 1]]
+  [1m[35m (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mTable Load (0.1ms)[0m  [1m[34mSELECT "tables".* FROM "tables" ORDER BY "tables"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mRestaurant Load (0.1ms)[0m  [1m[34mSELECT "restaurants".* FROM "restaurants" WHERE "restaurants"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mBooking Load (0.0ms)[0m  [1m[34mSELECT "bookings".* FROM "bookings" WHERE "bookings"."table_id" = ?[0m  [["table_id", 1]]
+  [1m[35m (0.1ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mTable Load (0.1ms)[0m  [1m[34mSELECT "tables".* FROM "tables" ORDER BY "tables"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mRestaurant Load (0.1ms)[0m  [1m[34mSELECT "restaurants".* FROM "restaurants" WHERE "restaurants"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mBooking Load (0.0ms)[0m  [1m[34mSELECT "bookings".* FROM "bookings" WHERE "bookings"."table_id" = ?[0m  [["table_id", 1]]
+  [1m[36mBooking Create (0.3ms)[0m  [1m[32mINSERT INTO "bookings" ("user_id", "table_id", "start_book", "end_book", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["user_id", 1], ["table_id", 1], ["start_book", "2020-05-18 22:00:00"], ["end_book", "2020-05-18 23:00:00"], ["created_at", "2020-05-18 09:55:59.021092"], ["updated_at", "2020-05-18 09:55:59.021092"]]
+  [1m[35m (0.9ms)[0m  [1m[36mcommit transaction[0m
